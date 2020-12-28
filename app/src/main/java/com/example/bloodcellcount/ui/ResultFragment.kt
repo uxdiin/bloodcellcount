@@ -30,7 +30,7 @@ import java.io.File
 
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
-class ResultFragment : Fragment(R.layout.fragment_result), PickiTCallbacks {
+class ResultFragment : Fragment(R.layout.fragment_result_new), PickiTCallbacks {
     private var imageData : Intent? = null
     private var imagename : MultipartBody.Part? = null
     var pickiT: PickiT? = null
@@ -47,6 +47,7 @@ class ResultFragment : Fragment(R.layout.fragment_result), PickiTCallbacks {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         pickiT = PickiT(requireContext(), this, requireActivity())
+        blood_cell_image_view.clipToOutline = true
         (activity as MainActivity).btnBack.visibility = View.VISIBLE
         (activity as MainActivity).btnBack.setOnClickListener {
             findNavController().popBackStack()
