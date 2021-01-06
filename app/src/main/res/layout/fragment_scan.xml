@@ -13,7 +13,7 @@
     <!-- TODO: Update blank fragment layout -->
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/transaksi_jual"
+        android:id="@+id/scan_using_capture"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
@@ -67,7 +67,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/scan_using_folder"
+        android:id="@+id/scan_using_open"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginStart="16dp"
@@ -79,7 +79,7 @@
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/transaksi_jual"
+        app:layout_constraintTop_toBottomOf="@+id/scan_using_capture"
         android:focusable="true">
 
         <TextView

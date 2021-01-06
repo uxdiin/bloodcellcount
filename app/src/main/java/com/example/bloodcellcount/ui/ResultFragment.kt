@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.database.Cursor
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.bloodcellcount.BuildConfig
 import com.example.bloodcellcount.MainActivity
@@ -33,10 +35,12 @@ import java.io.File
 class ResultFragment : Fragment(R.layout.fragment_result), PickiTCallbacks {
     private var imageData : Intent? = null
     private var imagename : MultipartBody.Part? = null
+    private val args : ResultFragmentArgs by navArgs()
     var pickiT: PickiT? = null
 
     companion object{
         public const val REQUEST_GET_IMAGE = 2
+        public const val REQUEST_CAPTURE_IMAGE = 3
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,9 +55,14 @@ class ResultFragment : Fragment(R.layout.fragment_result), PickiTCallbacks {
         (activity as MainActivity).btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
-
-        blood_cell_image_view.setOnClickListener {
-            openPhoto()
+        if (args.MODE == "OPEN"){
+            blood_cell_image_view.setOnClickListener {
+                openPhoto()
+            }
+        }else{
+            blood_cell_image_view.setOnClickListener {
+                capturePhoto()
+            }
         }
         btn_count.setOnClickListener {
             btn_count.startAnimation()
@@ -92,6 +101,12 @@ class ResultFragment : Fragment(R.layout.fragment_result), PickiTCallbacks {
             REQUEST_GET_IMAGE)
     }
 
+    private fun capturePhoto(){
+        val intent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent,
+            REQUEST_CAPTURE_IMAGE)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == REQUEST_GET_IMAGE && resultCode == Activity.RESULT_OK){
@@ -100,27 +115,12 @@ class ResultFragment : Fragment(R.layout.fragment_result), PickiTCallbacks {
             placeHolderGone()
             val pickedImg = pickiT!!.getPath(data!!.data!!,Build.VERSION.SDK_INT)
 //            Log.d("picked",pickedImg!! )
+        }else if(requestCode == REQUEST_CAPTURE_IMAGE && resultCode == Activity.RESULT_OK){
+//            var bitmap = data?.data
+            Glide.with(requireContext()).load((data?.extras?.get("data")) as Bitmap).into(blood_cell_image_view)
+            imageData = data
+            placeHolderGone()
         }
-    }
-
-    private fun getRealPathFromURI(contentURI: Uri): String? {
-        val result: String?
-        val cursor: Cursor? =
-            requireActivity().contentResolver.query(contentURI, null, null, null, null)
-        if (cursor == null) {
-            Log.d("column_count_null", cursor?.columnCount.toString())
-            result = contentURI.path
-        } else {
-            cursor.moveToFirst()
-            Log.d("column_count", cursor.columnCount.toString())
-            for(i in 0 until cursor.columnCount){
-                Log.d("column_name", cursor.getColumnName(i))
-            }
-            val idx = cursor.getColumnIndex("dat")
-            result = cursor.getString(idx)
-            cursor.close()
-        }
-        return result
     }
 
     override fun PickiTonUriReturned() {
@@ -146,5 +146,6 @@ class ResultFragment : Fragment(R.layout.fragment_result), PickiTCallbacks {
 
         imagename = MultipartBody.Part.createFormData("avatar",File(path).name,requestBody)
     }
+
 
 }

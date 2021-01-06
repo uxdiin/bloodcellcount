@@ -17,8 +17,17 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        scan_using_folder.setOnClickListener {
-            findNavController().navigate(R.id.action_scanFragment_to_resultFragment)
+        scan_using_capture.setOnClickListener {
+            val bundle = Bundle().apply{
+                putString("MODE","CAPTURE")
+            }
+            findNavController().navigate(R.id.action_scanFragment_to_resultFragment, bundle)
+        }
+        scan_using_open.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("MODE","OPEN")
+            }
+            findNavController().navigate(R.id.action_scanFragment_to_resultFragment, bundle)
         }
     }
 }
