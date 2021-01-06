@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+<<<<<<< HEAD
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -166,10 +167,80 @@
             app:layout_constraintHorizontal_bias="0.482"
             app:layout_constraintStart_toStartOf="@+id/blood_cell_image_view"
             app:layout_constraintTop_toTopOf="@+id/blood_cell_image_view" />
+=======
+    android:elevation="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="16dp"
+    tools:context=".ui.ResultFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="4dp"
+        android:translationZ="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="68dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/reem_kufi"
+            android:text="@string/num_of_red_blood_cell"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/cl_finish_project"
+            app:layout_constraintEnd_toEndOf="@+id/cl_finish_project"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/blood_cell_image_view" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_finish_project"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="76dp"
+            android:background="@drawable/background9"
+            android:padding="2dp"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <TextView
+                android:id="@+id/tv_num_of_blood_cell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="130sp"
+                app:layout_constraintEnd_toStartOf="@+id/textView33"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bloodcell"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> df67e525a34eb0d22e3c1f17911c353fd8d1b3d5
 
         <ImageView
             android:id="@+id/blood_cell_image_view"
             android:layout_width="match_parent"
+<<<<<<< HEAD
             android:layout_height="450dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
@@ -179,6 +250,17 @@
             android:focusable="true"
             android:radius="20dp"
             android:translationZ="3dp"
+=======
+            android:layout_height="300dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:contentDescription="@string/blood_image"
+            android:translationZ="1dp"
+            android:focusable="true"
+            android:radius="20dp"
+            android:background="@drawable/background9"
+>>>>>>> df67e525a34eb0d22e3c1f17911c353fd8d1b3d5
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -186,6 +268,21 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.027" />
 
+<<<<<<< HEAD
+=======
+        <ImageView
+            android:id="@+id/image_view_place_holder"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:contentDescription="@string/blood_image_place_holder"
+            android:src="@drawable/ic_picture"
+            app:layout_constraintBottom_toBottomOf="@+id/blood_cell_image_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/blood_cell_image_view"
+            app:layout_constraintTop_toTopOf="@+id/blood_cell_image_view"
+            app:layout_constraintVertical_bias="0.315" />
+>>>>>>> df67e525a34eb0d22e3c1f17911c353fd8d1b3d5
 
         <TextView
             android:id="@+id/tv_blood_image_place_holder"
@@ -193,6 +290,7 @@
             android:layout_height="wrap_content"
             android:text="@string/click_here_to_open_your_image"
             android:textColor="#CBD5D5"
+<<<<<<< HEAD
             android:translationZ="1dp"
             app:layout_constraintEnd_toEndOf="@+id/image_view_place_holder"
             app:layout_constraintHorizontal_bias="0.487"
@@ -224,6 +322,43 @@
             android:textColor="@color/red"
             app:layout_constraintStart_toEndOf="@+id/tv_num_of_blood_cell"
             app:layout_constraintTop_toTopOf="@+id/tv_num_of_blood_cell" />
+=======
+            app:layout_constraintBottom_toBottomOf="@+id/blood_cell_image_view"
+            app:layout_constraintEnd_toEndOf="@+id/image_view_place_holder"
+            app:layout_constraintHorizontal_bias="0.512"
+            app:layout_constraintStart_toStartOf="@+id/image_view_place_holder"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_place_holder"
+            app:layout_constraintVertical_bias="0.215" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="350dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="252dp"
+            android:elevation="1dp"
+            android:translationZ="1dp"
+            android:background="@drawable/background9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/blood_cell_image_view"
+            tools:visibility="visible">
+
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                android:id="@+id/btn_count"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background9"
+                android:elevation="4dp"
+                android:text="@string/count"
+                android:fontFamily="@font/reem_kufi"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+>>>>>>> df67e525a34eb0d22e3c1f17911c353fd8d1b3d5
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
