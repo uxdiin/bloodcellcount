@@ -7,9 +7,9 @@ import com.example.bloodcellcount.api.BloodCellDataService
 import com.example.bloodcellcount.datasource.BloodCellDataSource
 import com.example.bloodcellcount.repository.BloodCellRepository
 
-class BloodCellViewModelFactory(var application: Application): ViewModelProvider.Factory {
+class ResultFragmentViewModelFactory(var application: Application): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return BloodCellViewModel(
+        return ResultFragmentViewModel(
             repository = BloodCellRepository(
                 dataSource = BloodCellDataSource(
                     bloodCellDataService = RetrofitInstance.getRetrofitInstance()

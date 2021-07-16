@@ -3,8 +3,8 @@
     android:color="@color/grey">
     <item>
         <shape>
-            <solid android:color="@color/white" />
-            <corners android:radius="9dp"/>
+            <gradient android:endColor="@android:color/holo_blue_light" android:startColor="@android:color/holo_blue_dark"/>
+            <corners android:radius="20dp"/>
         </shape>
     </item>
 

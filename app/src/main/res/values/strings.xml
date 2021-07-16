@@ -10,4 +10,11 @@
     <string name="click_here_to_open_your_image">Click Here to Open Your Image</string>
     <string name="bloodcell">bloodcell</string>
     <string name="back_button">Back Button</string>
+    <string name="result">Result</string>
+    <string name="this_field_will_show_your_image_path_in_your_device">This field will show your image path in your device</string>
+    <string name="image_name">Image Name</string>
+    <string name="scan_menu">Scan\nMenu</string>
+    <string name="scan_mode">scan_mode</string>
+    <string name="a">adad</string>
+    <string name="backbone">Backbone</string>
 </resources>
