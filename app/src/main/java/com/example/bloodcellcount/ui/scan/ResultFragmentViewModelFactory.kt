@@ -1,4 +1,4 @@
-package com.example.bloodcellcount.viewmodel
+package com.example.bloodcellcount.ui.scan
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
@@ -14,7 +14,7 @@ class ResultFragmentViewModelFactory(var application: Application): ViewModelPro
                 dataSource = BloodCellDataSource(
                     bloodCellDataService = RetrofitInstance.getRetrofitInstance()
                         .create(BloodCellDataService::class.java)
-                ),application = application
+                )
             )
         ) as T
     }

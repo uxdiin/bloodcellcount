@@ -1,4 +1,4 @@
-package com.example.bloodcellcount.ui
+package com.example.bloodcellcount.ui.scan
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -15,7 +15,7 @@ import com.example.bloodcellcount.BuildConfig
 import com.example.bloodcellcount.MainActivity
 import com.example.bloodcellcount.R
 import com.example.bloodcellcount.datasource.BloodCellDataSource
-import com.example.bloodcellcount.models.BloodResponse
+import com.example.bloodcellcount.models.BloodCountResponse
 import com.example.bloodcellcount.repository.BloodCellRepository
 import com.hbisoft.pickit.PickiT
 import com.hbisoft.pickit.PickiTCallbacks
@@ -83,16 +83,16 @@ class ResultFragment : Fragment(R.layout.fragment_result_new), PickiTCallbacks {
             findNavController().navigate(R.id.action_resultFragment_to_scanFragment)
         }
 
-        btn_count.setOnClickListener {
-            btn_count.startAnimation()
+        tv_backbone.setOnClickListener {
+            tv_backbone.startAnimation()
             (activity as MainActivity).resultFragmentViewModel!!.count(
-                "lol",
+                tv_image_name.text.toString(),
                 photo,
                 selectedBackbone,
                 object : BloodCellDataSource.BloodCellDataCallBack {
-                    override fun onSuccess(bloodResponse: BloodResponse) {
+                    override fun onSuccess(bloodCountResponse: BloodCountResponse) {
                         drawImage(photoPath)
-                        bloodResponse.let {
+                        bloodCountResponse.let {
                             tv_num_of_blood_cell.text = it.bloodCell?.numOfBloodCell.toString()
                             Log.d("photo", BuildConfig.BASE_MEDIA_URL + it)
                             for(bbox in it.bboxes){
@@ -101,13 +101,13 @@ class ResultFragment : Fragment(R.layout.fragment_result_new), PickiTCallbacks {
                             }
                             blood_cell_image_view.commitDrawing()
                         }
-                        btn_count.revertAnimation()
+                        tv_backbone.revertAnimation()
                     }
 
                     @SuppressLint("ShowToast")
                     override fun onError(errorMessage: String) {
                         Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
-                        btn_count.revertAnimation()
+                        tv_backbone.revertAnimation()
                     }
 
                 })
@@ -145,7 +145,7 @@ class ResultFragment : Fragment(R.layout.fragment_result_new), PickiTCallbacks {
     }
 
     private fun drawImage(path: String){
-        blood_cell_image_view.setImage(path)
+        blood_cell_image_view.setImageFromLocalPath(path)
         blood_cell_image_view.commitDrawing()
     }
 
@@ -170,7 +170,7 @@ class ResultFragment : Fragment(R.layout.fragment_result_new), PickiTCallbacks {
     ) {
         path?.let {
             val requestBody = RequestBody.create(MediaType.parse("multipart"), File(path!!))
-            image_name.text = File(path).name
+            tv_image_name.text = File(path).name
 
             photoPath = path;
             drawImage(photoPath)

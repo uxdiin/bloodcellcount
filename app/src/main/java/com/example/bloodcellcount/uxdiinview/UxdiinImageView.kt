@@ -2,7 +2,9 @@ package com.example.bloodcellcount.uxdiinview
 
 import android.content.Context
 import android.graphics.*
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import androidx.core.graphics.drawable.toBitmap
 
 class UxdiinImageView(context: Context, attrs: AttributeSet?=null) : androidx.appcompat.widget.AppCompatImageView(context, attrs) {
 
@@ -12,13 +14,25 @@ class UxdiinImageView(context: Context, attrs: AttributeSet?=null) : androidx.ap
     private  var witdhDiff: Float = 0F
     private  var heightDiff: Float = 0F
 
-    public fun setImage(path: String){
+    public fun setImageFromLocalPath(path: String){
         this.imagePath = path
         val bmp = Bitmap.createBitmap(BitmapFactory.decodeFile(this.imagePath))
-//        witdhDiff = this.width / bmp.width.toFloat()
-//        Log.d("width",this.width.toString()+" "+this.height)
-//        heightDiff = bmp.height*witdhDiff
         this.bmp = bmp.copy(Bitmap.Config.ARGB_8888,true)
+        cnvs = Canvas(this.bmp)
+    }
+
+    fun setImageFromBitmap(bitmap: Bitmap){
+        this.bmp = bitmap
+        this.bmp = bmp.copy(Bitmap.Config.ARGB_8888,true)
+        cnvs = Canvas(this.bmp)
+    }
+
+    fun setImageFromDrawable(drawable: Drawable){
+        this.bmp = drawable.toBitmap()
+    }
+
+    fun emptyBitmap(measuredWidth: Int,measuredHeight: Int){
+        this.bmp = Bitmap.createBitmap(measuredWidth,measuredHeight,Bitmap.Config.ARGB_8888)
         cnvs = Canvas(this.bmp)
     }
 
@@ -32,8 +46,6 @@ class UxdiinImageView(context: Context, attrs: AttributeSet?=null) : androidx.ap
         paint.isAntiAlias = true
         paint.isFilterBitmap = true
         paint.isDither = true;
-
-//        cnvs.drawRect(x1 *witdhDiff ,y1 *witdhDiff ,x2 *heightDiff ,y2 *heightDiff, paint);
         cnvs.drawRect(x1  ,y1  ,x2  ,y2 , paint);
 
     }

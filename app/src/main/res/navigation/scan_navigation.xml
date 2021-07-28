@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/scanFragment"
-        android:name="com.example.bloodcellcount.ui.ScanFragment"
+        android:name="com.example.bloodcellcount.ui.scan.ScanFragment"
         android:label="fragment_scan"
         tools:layout="@layout/fragment_scan" >
         <action
@@ -27,7 +27,7 @@
         app:exitAnim="@anim/fragment_open_exit"/>
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.example.bloodcellcount.ui.ResultFragment"
+        android:name="com.example.bloodcellcount.ui.scan.ResultFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_result" >
         <argument

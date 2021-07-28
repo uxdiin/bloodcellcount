@@ -98,12 +98,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:fontFamily="sans-serif-thin"
+                android:fontFamily="@font/quicksand_bold"
                 android:text="Bloodcellcount"
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle=""
-                app:layout_constraintBottom_toBottomOf="@+id/btn_count"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_backbone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.063"
                 app:layout_constraintStart_toStartOf="parent"
@@ -122,7 +122,6 @@
                 android:layout_marginBottom="8dp"
                 android:padding="5dp"
                 android:background="@drawable/edittextbackground9"
-                app:layout_constraintBottom_toTopOf="@+id/btn_detail_bonus"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/tv_num_of_blood_cell"
@@ -155,12 +154,14 @@
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btn_detail_bonus"
+                android:id="@+id/btn_image_scanned"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/background9_blue"
                 android:elevation="3dp"
+                android:focusable="true"
+                android:clickable="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.052"
                 app:layout_constraintStart_toStartOf="parent"
@@ -209,8 +210,8 @@
                 android:elevation="3dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/btn_detail_bonus"
-                app:layout_constraintTop_toBottomOf="@+id/btn_detail_bonus">
+                app:layout_constraintStart_toStartOf="@+id/btn_image_scanned"
+                app:layout_constraintTop_toBottomOf="@+id/btn_image_scanned">
 
                 <TextView
                     android:id="@+id/textView25"

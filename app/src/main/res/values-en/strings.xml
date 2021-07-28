@@ -11,4 +11,6 @@
     <string name="this_field_will_show_your_image_path_in_your_device">This field will show your image path in your device</string>
     <string name="image_name">Image Name</string>
     <string name="scan_menu">Scan\nMenu</string>
+    <string name="name">name</string>
+    <string name="num_of_bloodcell">0</string>
 </resources>

@@ -23,5 +23,6 @@
     <color name="lighteryellow">#FFF6BC</color>
     <color name="opacityPrimaryColor">#26426198</color>
     <color name="semiWhite">#f5f5f5</color>
+    <color name="transparent">#00000000</color>
 
 </resources>

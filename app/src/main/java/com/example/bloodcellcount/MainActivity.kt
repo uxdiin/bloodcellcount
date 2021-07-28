@@ -7,14 +7,26 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
-import com.example.bloodcellcount.viewmodel.ResultFragmentViewModel
-import com.example.bloodcellcount.viewmodel.ResultFragmentViewModelFactory
+import com.example.bloodcellcount.databinding.ActivityMainBinding
+import com.example.bloodcellcount.ui.scan.ResultFragmentViewModel
+import com.example.bloodcellcount.ui.scan.ResultFragmentViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    var resultFragmentViewModel : ResultFragmentViewModel?=null;
+    private lateinit var activityMainBinding: ActivityMainBinding
+    var resultFragmentViewModel : ResultFragmentViewModel?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(activityMainBinding.root)
+//        if (savedInstanceState == null) {
+//            supportFragmentManager.commit {
+//                setReorderingAllowed(true)
+//                add<DashboardFragment>(R.id.main_navhost_fragment)
+//            }
+//        }
         ActivityCompat.requestPermissions(
             this@MainActivity, arrayOf(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -23,8 +35,11 @@ class MainActivity : AppCompatActivity() {
             100
         )
         val bloodCellViewModelFactory = ResultFragmentViewModelFactory(application)
-        resultFragmentViewModel = ViewModelProvider(this, bloodCellViewModelFactory).get(ResultFragmentViewModel::class.java)
+        resultFragmentViewModel = ViewModelProvider(this, bloodCellViewModelFactory).get(
+            ResultFragmentViewModel::class.java)
     }
+
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,

@@ -17,4 +17,6 @@
     <string name="scan_mode">scan_mode</string>
     <string name="a">adad</string>
     <string name="backbone">Backbone</string>
+    <string name="name">name</string>
+    <string name="num_of_bloodcell">0</string>
 </resources>
