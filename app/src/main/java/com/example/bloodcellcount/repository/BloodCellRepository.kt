@@ -1,7 +1,7 @@
 package com.example.bloodcellcount.repository
 
-import com.androiddevs.mvvmnewsapp.util.Resource
-import com.androiddevs.mvvmnewsapp.util.safeApiCall
+import com.example.bloodcellcount.util.Resource
+import com.example.bloodcellcount.util.safeApiCall
 import com.example.bloodcellcount.datasource.BloodCellDataSource
 import com.example.bloodcellcount.models.BloodCell
 import com.example.bloodcellcount.models.BloodPage
@@ -23,7 +23,7 @@ class BloodCellRepository(var dataSource: BloodCellDataSource,private val dispat
         dataSource.count(name,photo,backbone,bloodCellDataCallBack)
     }
 
-    suspend fun getAll(): Resource<Response<BloodPage>> {
+    suspend fun getAll(authToken: String = ""): Resource<Response<BloodPage>> {
         return safeApiCall(dispatcher){
             dataSource.bloods()
         }

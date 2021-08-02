@@ -12,25 +12,22 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.androiddevs.mvvmnewsapp.util.Resource
+import com.example.bloodcellcount.util.Resource
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
-import com.example.bloodcellcount.R
 import com.example.bloodcellcount.databinding.FragmentBloodDetailBinding
 import com.example.bloodcellcount.models.BloodCell
-import com.example.bloodcellcount.models.bbox
 import com.example.bloodcellcount.ui.genericview.BackButton
+import com.example.bloodcellcount.ui.util.WithBackButtonFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_result_new.*
 
 @AndroidEntryPoint
-class BloodDetailFragment : Fragment(),BackButton {
+class BloodDetailFragment : WithBackButtonFragment(),BackButton {
 
     private lateinit var bloodDetailBinding: FragmentBloodDetailBinding
     private lateinit var photo:Bitmap
@@ -92,10 +89,10 @@ class BloodDetailFragment : Fragment(),BackButton {
                                     bloodDetailBinding.bloodCellImageView.setImageFromBitmap(resource)
                                     blood.bboxes?.let {
                                         for(bbox in blood.bboxes!!){
-                                            blood_cell_image_view.drawRect(bbox.x1 ,bbox.y1 ,bbox.x2 ,bbox.y2,1)
+                                            bloodDetailBinding.bloodCellImageView.drawRect(bbox.x1 ,bbox.y1 ,bbox.x2 ,bbox.y2,1)
                                             Log.d("bbox", bbox.toString())
                                         }
-                                        blood_cell_image_view.commitDrawing()
+                                        bloodDetailBinding.bloodCellImageView.commitDrawing()
                                     }
                                 }
                                 return true

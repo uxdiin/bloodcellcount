@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.DashboardFragment">
+    tools:context=".ui.dashboard.DashboardFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/main_toolbar"
@@ -58,7 +58,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/circleImageView"
+                android:id="@+id/profilePicture"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@mipmap/pp"
@@ -71,7 +71,7 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -79,9 +79,9 @@
                 android:text="Taqi Naufan"
                 android:textColor="@color/black"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
-                app:layout_constraintEnd_toStartOf="@+id/circleImageView"
-                app:layout_constraintTop_toTopOf="@+id/circleImageView"
+                app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
+                app:layout_constraintEnd_toStartOf="@+id/profilePicture"
+                app:layout_constraintTop_toTopOf="@+id/profilePicture"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -89,9 +89,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/reem_kufi"
                 android:text="Student"
-                app:layout_constraintBottom_toBottomOf="@+id/circleImageView"
-                app:layout_constraintEnd_toEndOf="@+id/textView3"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
+                app:layout_constraintEnd_toEndOf="@+id/tv_user_name"
+                app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
             <TextView
                 android:id="@+id/tv_num_of_blood_cell"
@@ -110,7 +110,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/btn_back" />
 
             <EditText
-                android:id="@+id/editText"
+                android:id="@+id/edt_password"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:drawableStart="@drawable/ic_search"

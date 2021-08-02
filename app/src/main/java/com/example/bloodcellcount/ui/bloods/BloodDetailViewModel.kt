@@ -3,7 +3,7 @@ package com.example.bloodcellcount.ui.bloods
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.androiddevs.mvvmnewsapp.util.Resource
+import com.example.bloodcellcount.util.Resource
 import com.example.bloodcellcount.models.BloodCell
 import com.example.bloodcellcount.repository.BloodCellRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +20,7 @@ class BloodDetailViewModel @Inject constructor(private val bloodCellRepository: 
         blood.postValue(handleFind(response))
     }
 
-    private fun handleFind(resource: Resource<Response<BloodCell>>): Resource<Response<BloodCell>>{
+    private fun handleFind(resource: Resource<Response<BloodCell>>): Resource<Response<BloodCell>> {
         return resource
     }
 }
