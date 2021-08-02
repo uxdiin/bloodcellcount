@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/dashboardFragment2">
+
+    <fragment
+        android:id="@+id/dashboardFragment2"
+        android:name="com.example.bloodcellcount.ui.dashboard.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_dashboardFragment2_to_bloodListFragment2"
+            app:destination="@id/bloodListFragment2"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:popEnterAnim="@anim/fragment_close_enter" />
+    </fragment>
+    <fragment
+        android:id="@+id/bloodListFragment2"
+        android:name="com.example.submission1.ui.main.movie.BloodListFragment"
+        android:label="BloodListFragment" >
+        <action
+            android:id="@+id/action_bloodListFragment2_to_bloodDetailFragment"
+            app:destination="@id/bloodDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bloodDetailFragment"
+        android:name="com.example.bloodcellcount.ui.bloods.BloodDetailFragment"
+        android:label="BloodDetailFragment">
+        <argument
+            android:name="bloodId"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+</navigation>
