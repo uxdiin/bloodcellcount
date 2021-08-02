@@ -6,6 +6,7 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="green">#2ad608</color>
+    <color name="gray">#dbdbdb</color>
     <color name="darkgreen">#197E05</color>
     <color name="grey">#B3B3B3</color>
     <color name="lightgrey">#FFE0E0E0</color>
@@ -21,5 +22,6 @@
     <color name="lightyellow">#FFF39A</color>
     <color name="lighteryellow">#FFF6BC</color>
     <color name="opacityPrimaryColor">#26426198</color>
+    <color name="semiWhite">#f5f5f5</color>
 
 </resources>

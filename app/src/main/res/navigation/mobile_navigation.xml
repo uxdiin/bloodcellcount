@@ -13,7 +13,6 @@
         tools:layout="@layout/fragment_scan" >
         <action
             android:id="@+id/action_scanFragment_to_resultFragment"
-            app:popExitAnim="@anim/fragment_close_exit"
             app:destination="@id/resultFragment"
             app:enterAnim="@anim/fragment_open_enter"
             app:exitAnim="@anim/fragment_open_exit"/>
@@ -32,9 +31,11 @@
         android:label="fragment_result"
         tools:layout="@layout/fragment_result" >
         <argument
-            android:name="MODE"
-            android:defaultValue="null"
-            app:argType="string"/>
+            android:name="scanMode"
+            app:argType="integer"
+            app:nullable="false"
+            android:defaultValue="0"/>
+
         <action
             android:id="@+id/action_resultFragment_to_scanFragment"
             app:destination="@id/scanFragment"

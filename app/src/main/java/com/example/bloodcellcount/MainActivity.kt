@@ -6,13 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.bloodcellcount.viewmodel.BloodCellViewModel
-import com.example.bloodcellcount.viewmodel.BloodCellViewModelFactory
+import com.example.bloodcellcount.viewmodel.ResultFragmentViewModel
+import com.example.bloodcellcount.viewmodel.ResultFragmentViewModelFactory
 
 class MainActivity : AppCompatActivity() {
-    var bloodCellViewModel : BloodCellViewModel?=null;
+    var resultFragmentViewModel : ResultFragmentViewModel?=null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -24,8 +23,8 @@ class MainActivity : AppCompatActivity() {
             ),
             100
         )
-        val bloodCellViewModelFactory = BloodCellViewModelFactory(application)
-        bloodCellViewModel = ViewModelProvider(this, bloodCellViewModelFactory).get(BloodCellViewModel::class.java)
+        val bloodCellViewModelFactory = ResultFragmentViewModelFactory(application)
+        resultFragmentViewModel = ViewModelProvider(this, bloodCellViewModelFactory).get(ResultFragmentViewModel::class.java)
     }
     override fun onRequestPermissionsResult(
         requestCode: Int,

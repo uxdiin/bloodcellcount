@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-<<<<<<< HEAD
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -13,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
+        android:layout_marginStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,10 +21,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteX="16dp">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btn_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="344dp"
                 android:background="@drawable/back_button_background"
                 android:clickable="true"
@@ -56,55 +58,27 @@
                     app:layout_constraintStart_toEndOf="@+id/btnBack"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.56" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView37"
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/spinner_backbone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="16dp"
-                android:fontFamily="@font/reem_kufi"
-                android:text="RBC Count"
-                android:textColor="@color/black"
-                android:textSize="30sp"
-                android:textStyle="bold"
+                android:text="@string/backbone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.03"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_back"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-                android:id="@+id/btn_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background6_green"
-                android:elevation="4dp"
-                android:fontFamily="@font/reem_kufi"
-                android:gravity="center_vertical|center_horizontal"
-                android:padding="1dp"
-                android:text="@string/count"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView37"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.922"
-                app:layout_constraintStart_toEndOf="@+id/textView37"
-                app:layout_constraintTop_toTopOf="@+id/textView37"
-                app:layout_constraintVertical_bias="0.69" />
-
-
+                app:layout_constraintHorizontal_bias="0.925"
+                app:layout_constraintStart_toEndOf="@+id/btn_back"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.86"></com.jaredrummler.materialspinner.MaterialSpinner>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:padding="10dp"
+        android:layout_height="630dp"
         android:background="@color/white"
         android:translationZ="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -114,186 +88,59 @@
         app:layout_constraintTop_toBottomOf="@+id/main_toolbar"
         app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
-            android:id="@+id/iv_file_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_baseline_file_name_24"
-            app:layout_constraintBottom_toBottomOf="@+id/image_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/image_name" />
-
-        <TextView
-            android:id="@+id/blood_cell_count_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/reem_kufi"
-            android:text="Count Results"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/blood_cell_image_view"
-            app:layout_constraintHorizontal_bias="0.065"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/blood_cell_image_view"
-            app:layout_constraintVertical_bias="0.106" />
-
-        <TextView
-            android:id="@+id/image_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/reem_kufi"
-            android:text="Image Name"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_file_name"
-            app:layout_constraintTop_toBottomOf="@+id/blood_cell_count_title" />
+        <View
+            android:id="@+id/view3"
+            android:layout_width="120dp"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_num_of_blood_cell"
+            app:layout_constraintStart_toStartOf="@+id/tv_num_of_blood_cell"
+            app:layout_constraintTop_toBottomOf="@+id/tv_num_of_blood_cell" />
 
         <ImageView
             android:id="@+id/image_view_place_holder"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:contentDescription="@string/blood_image_place_holder"
+            android:elevation="3dp"
             android:src="@drawable/ic_picture"
-            android:translationZ="2dp"
+            android:translationZ="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/blood_cell_image_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.482"
             app:layout_constraintStart_toStartOf="@+id/blood_cell_image_view"
             app:layout_constraintTop_toTopOf="@+id/blood_cell_image_view" />
-=======
-    android:elevation="4dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="16dp"
-    android:layout_marginBottom="16dp"
-    tools:context=".ui.ResultFragment">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="4dp"
-        android:translationZ="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
 
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="68dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/reem_kufi"
-            android:text="@string/num_of_red_blood_cell"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/cl_finish_project"
-            app:layout_constraintEnd_toEndOf="@+id/cl_finish_project"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/blood_cell_image_view" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_finish_project"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="76dp"
-            android:background="@drawable/background9"
-            android:padding="2dp"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
-            app:layout_constraintHorizontal_bias="0.7"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
-
-            <TextView
-                android:id="@+id/tv_num_of_blood_cell"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textColor="@android:color/holo_green_dark"
-                android:textSize="130sp"
-                app:layout_constraintEnd_toStartOf="@+id/textView33"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView33"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/bloodcell"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> df67e525a34eb0d22e3c1f17911c353fd8d1b3d5
-
-        <ImageView
+        <com.example.bloodcellcount.uxdiinview.UxdiinImageView
             android:id="@+id/blood_cell_image_view"
             android:layout_width="match_parent"
-<<<<<<< HEAD
-            android:layout_height="450dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_height="420dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="72dp"
             android:background="@drawable/background9"
             android:clickable="true"
             android:contentDescription="@string/blood_image"
             android:focusable="true"
             android:radius="20dp"
-            android:translationZ="3dp"
-=======
-            android:layout_height="300dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:clickable="true"
-            android:contentDescription="@string/blood_image"
-            android:translationZ="1dp"
-            android:focusable="true"
-            android:radius="20dp"
-            android:background="@drawable/background9"
->>>>>>> df67e525a34eb0d22e3c1f17911c353fd8d1b3d5
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.027" />
-
-<<<<<<< HEAD
-=======
-        <ImageView
-            android:id="@+id/image_view_place_holder"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:contentDescription="@string/blood_image_place_holder"
-            android:src="@drawable/ic_picture"
-            app:layout_constraintBottom_toBottomOf="@+id/blood_cell_image_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="@+id/blood_cell_image_view"
-            app:layout_constraintTop_toTopOf="@+id/blood_cell_image_view"
-            app:layout_constraintVertical_bias="0.315" />
->>>>>>> df67e525a34eb0d22e3c1f17911c353fd8d1b3d5
+            app:layout_constraintTop_toBottomOf="@+id/image_name"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/tv_blood_image_place_holder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:elevation="3dp"
             android:text="@string/click_here_to_open_your_image"
             android:textColor="#CBD5D5"
-<<<<<<< HEAD
-            android:translationZ="1dp"
+            android:translationZ="4dp"
             app:layout_constraintEnd_toEndOf="@+id/image_view_place_holder"
-            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintHorizontal_bias="0.425"
             app:layout_constraintStart_toStartOf="@+id/image_view_place_holder"
             app:layout_constraintTop_toBottomOf="@+id/image_view_place_holder" />
 
@@ -301,64 +148,59 @@
             android:id="@+id/tv_num_of_blood_cell"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="0"
-            android:textColor="@color/red"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/blood_cell_count_title"
-            app:layout_constraintStart_toEndOf="@+id/blood_cell_count_title"
-            app:layout_constraintTop_toTopOf="@+id/blood_cell_count_title"
-            app:layout_constraintVertical_bias="0.78" />
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/poppins_light"
+            android:text="00"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:textStyle=""
+            app:layout_constraintBottom_toBottomOf="@+id/btn_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.063"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/textView33"
-            android:layout_width="58dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/reem_kufi"
-            android:text="@string/bloodcell"
-            android:textColor="@color/red"
-            app:layout_constraintStart_toEndOf="@+id/tv_num_of_blood_cell"
-            app:layout_constraintTop_toTopOf="@+id/tv_num_of_blood_cell" />
-=======
-            app:layout_constraintBottom_toBottomOf="@+id/blood_cell_image_view"
-            app:layout_constraintEnd_toEndOf="@+id/image_view_place_holder"
-            app:layout_constraintHorizontal_bias="0.512"
-            app:layout_constraintStart_toStartOf="@+id/image_view_place_holder"
-            app:layout_constraintTop_toBottomOf="@+id/image_view_place_holder"
-            app:layout_constraintVertical_bias="0.215" />
+            android:text="Cells"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_num_of_blood_cell"
+            app:layout_constraintStart_toStartOf="@+id/tv_num_of_blood_cell" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
-            android:layout_width="350dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="252dp"
-            android:elevation="1dp"
-            android:translationZ="1dp"
-            android:background="@drawable/background9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.491"
+        <TextView
+            android:id="@+id/image_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="Image Name"
+            android:textColor="@color/black"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/blood_cell_image_view"
-            tools:visibility="visible">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-                android:id="@+id/btn_count"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background9"
-                android:elevation="4dp"
-                android:text="@string/count"
-                android:fontFamily="@font/reem_kufi"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
->>>>>>> df67e525a34eb0d22e3c1f17911c353fd8d1b3d5
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+            android:id="@+id/btn_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="68dp"
+            android:background="@drawable/background6_green"
+            android:elevation="4dp"
+            android:fontFamily="@font/reem_kufi"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="1dp"
+            android:text="@string/count"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.928"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/blood_cell_image_view"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,17 +17,11 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        scan_using_capture.setOnClickListener {
-            val bundle = Bundle().apply{
-                putString("MODE","CAPTURE")
-            }
-            findNavController().navigate(R.id.action_scanFragment_to_resultFragment, bundle)
-        }
-        scan_using_open.setOnClickListener {
+        scan_using_folder.setOnClickListener {
             val bundle = Bundle().apply {
-                putString("MODE","OPEN")
+                putInt(ResultFragment.SCAN_METHOD,ResultFragment.SCAN_METHOD_FROM_STORAGE)
             }
-            findNavController().navigate(R.id.action_scanFragment_to_resultFragment, bundle)
+            findNavController().navigate(R.id.action_scanFragment_to_resultFragment,bundle)
         }
     }
 }
