@@ -13,4 +13,6 @@
     <string name="scan_menu">Scan Menu</string>
     <string name="name">name</string>
     <string name="num_of_bloodcell">num of bloodcell</string>
+    <string name="login_text">login</string>
+    <string name="password_text">Password</string>
 </resources>

@@ -19,4 +19,7 @@
     <string name="backbone">Backbone</string>
     <string name="name">name</string>
     <string name="num_of_bloodcell">0</string>
+    <string name="login_text">login</string>
+    <string name="username_text">Username</string>
+    <string name="password_text">Password</string>
 </resources>

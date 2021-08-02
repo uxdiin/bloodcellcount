@@ -3,7 +3,7 @@ package com.example.bloodcellcount.ui.bloods
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.androiddevs.mvvmnewsapp.util.Resource
+import com.example.bloodcellcount.util.Resource
 import com.example.bloodcellcount.models.BloodPage
 import com.example.bloodcellcount.repository.BloodCellRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -5,6 +5,7 @@ import com.example.bloodcellcount.api.BloodCellDataService
 import com.example.bloodcellcount.models.BloodCell
 import com.example.bloodcellcount.models.BloodCountResponse
 import com.example.bloodcellcount.models.BloodPage
+import com.example.bloodcellcount.util.AuthUser
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -42,9 +43,9 @@ public class BloodCellDataSource(val bloodCellDataService: BloodCellDataService)
         call.enqueue(obj)
     }
 
-    suspend fun bloods() = bloodCellDataService.bloods("Token 2d6a98394112122ae5eec11e98385887fecf32ab")
+    suspend fun bloods() = bloodCellDataService.bloods("Token ${AuthUser.token}")
 
-    suspend fun getBloodById(bloodId: String) = bloodCellDataService.getBloodById("Token 2d6a98394112122ae5eec11e98385887fecf32ab",bloodId)
+    suspend fun getBloodById(bloodId: String) = bloodCellDataService.getBloodById("Token  ${AuthUser.token}",bloodId)
 
     interface BloodCellDataCallBack{
         fun onSuccess(bloodCountResponse:BloodCountResponse)
