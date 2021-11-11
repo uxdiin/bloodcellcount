@@ -2,9 +2,7 @@ package com.example.bloodcellcount.datasource
 
 import android.util.Log
 import com.example.bloodcellcount.api.BloodCellDataService
-import com.example.bloodcellcount.models.BloodCell
-import com.example.bloodcellcount.models.BloodCountResponse
-import com.example.bloodcellcount.models.BloodPage
+import com.example.bloodcellcount.dataclass.BloodCountResponse
 import com.example.bloodcellcount.util.AuthUser
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -43,9 +41,11 @@ public class BloodCellDataSource(val bloodCellDataService: BloodCellDataService)
         call.enqueue(obj)
     }
 
-    suspend fun bloods() = bloodCellDataService.bloods("Token ${AuthUser.token}")
+    suspend fun bloods(parameters: Map<String, String>) = bloodCellDataService.bloods("Token ${AuthUser.token}", parameters)
 
     suspend fun getBloodById(bloodId: String) = bloodCellDataService.getBloodById("Token  ${AuthUser.token}",bloodId)
+
+    suspend fun backBoneStatistic() = bloodCellDataService.backboneStatistic("Token ${AuthUser.token}")
 
     interface BloodCellDataCallBack{
         fun onSuccess(bloodCountResponse:BloodCountResponse)

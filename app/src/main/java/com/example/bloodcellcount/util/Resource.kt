@@ -1,6 +1,6 @@
 package com.example.bloodcellcount.util
 
-import com.example.bloodcellcount.models.LoginResponse
+import com.example.bloodcellcount.dataclass.ErrorResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
@@ -31,8 +31,14 @@ suspend fun <T> safeApiCall(dispatcher: CoroutineDispatcher, apiCall: suspend() 
                     println( throwable . printStackTrace ())
                     val response = throwable.response()!!.errorBody()
                     val jsonObj = JSONObject(response!!.charStream().readText())
-                    val loginResponse = LoginResponse(non_field_errors = jsonObj.getString("non_field_errors"))
-                    Resource.Error(loginResponse as T,throwable.message())
+                    val nonFieldError: String
+                    if (jsonObj.has("non_field_errors")){
+                        nonFieldError = jsonObj.getString("non_field_errors")
+                    }else{
+                        nonFieldError = jsonObj.toString()
+                    }
+                    val errorResponse =  ErrorResponse(non_field_errors = nonFieldError)
+                    Resource.Error(errorResponse as T,throwable.message())
                 }
                 else -> {
                     println( throwable . printStackTrace ())

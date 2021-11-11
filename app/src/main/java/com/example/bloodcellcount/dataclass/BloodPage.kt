@@ -1,4 +1,4 @@
-package com.example.bloodcellcount.models
+package com.example.bloodcellcount.dataclass
 
 data class BloodPage(
     var count: Int? = null,

@@ -1,4 +1,4 @@
-package com.example.bloodcellcount.models
+package com.example.bloodcellcount.dataclass
 
 data class User(
     var id: String? = null,

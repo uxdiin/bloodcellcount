@@ -5,12 +5,10 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.bloodcellcount.util.Resource
 import com.bumptech.glide.Glide
@@ -21,7 +19,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.example.bloodcellcount.databinding.FragmentBloodDetailBinding
-import com.example.bloodcellcount.models.BloodCell
+import com.example.bloodcellcount.dataclass.BloodCell
 import com.example.bloodcellcount.ui.genericview.BackButton
 import com.example.bloodcellcount.ui.util.WithBackButtonFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,16 +54,14 @@ class BloodDetailFragment : WithBackButtonFragment(),BackButton {
         arguments?.let {
             it.getString("bloodId")?.let {
                 bloodDetailViewModel.find(it)
-                Log.d("bloodId",it)
             }
         }
-        bloodDetailViewModel.blood.observe(viewLifecycleOwner, Observer {resource->
+        bloodDetailViewModel.blood.observe(viewLifecycleOwner, { resource->
             when(resource) {
                 is Resource.Success -> {
 //                    hideProgressBar()
-                    resource.data?.let { response ->
-                        Log.d("result","result")
-                        blood = response.body() as BloodCell
+                    resource.data?.let { blood ->
+                        blood as BloodCell
                         bloodDetailBinding.tvNumOfBloodCell.text = blood.numOfBloodCell.toString()
                         bloodDetailBinding.tvImageName.text = blood.name
                         bloodDetailBinding.tvBackbone.text = blood.backbone

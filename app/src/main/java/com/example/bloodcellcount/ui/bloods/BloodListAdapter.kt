@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bloodcellcount.databinding.ItemRowBloodBinding
-import com.example.bloodcellcount.models.BloodCell
+import com.example.bloodcellcount.dataclass.BloodCell
 
 class BloodListAdapter: RecyclerView.Adapter<BloodListAdapter.MovieItemViewHolder>() {
     private val bloods = ArrayList<BloodCell>()
@@ -44,6 +44,10 @@ class BloodListAdapter: RecyclerView.Adapter<BloodListAdapter.MovieItemViewHolde
 
     fun setBloodList(bloodCell:ArrayList<BloodCell>){
         this.bloods.addAll(bloodCell)
+    }
+
+    fun emptyBloodList(){
+        this.bloods.clear();
     }
 
     var onBloodClickListener: ((String)->Unit)? = null

@@ -13,16 +13,21 @@
         <action
             android:id="@+id/action_dashboardFragment2_to_bloodListFragment2"
             app:destination="@id/bloodListFragment2"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:popEnterAnim="@anim/fragment_close_enter" />
+            app:enterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_dashboardFragment2_to_settingActivity"
+            app:destination="@id/settingActivity" />
     </fragment>
     <fragment
         android:id="@+id/bloodListFragment2"
-        android:name="com.example.submission1.ui.main.movie.BloodListFragment"
+        android:name="com.example.bloodcellcount.ui.bloods.BloodListFragment"
         android:label="BloodListFragment" >
         <action
             android:id="@+id/action_bloodListFragment2_to_bloodDetailFragment"
-            app:destination="@id/bloodDetailFragment" />
+            app:destination="@id/bloodDetailFragment"
+            app:enterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
     <fragment
         android:id="@+id/bloodDetailFragment"
@@ -33,4 +38,9 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+    <activity
+        android:id="@+id/settingActivity"
+        android:name="com.example.bloodcellcount.ui.setting.SettingActivity"
+        android:label="activity_setting"
+        tools:layout="@layout/activity_setting" />
 </navigation>

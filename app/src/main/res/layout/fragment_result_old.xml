@@ -117,7 +117,7 @@
 
 
     <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
-        android:id="@+id/tv_backbone"
+        android:id="@+id/btn_count"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="95dp"

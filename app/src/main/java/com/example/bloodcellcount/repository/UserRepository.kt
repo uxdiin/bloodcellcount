@@ -1,7 +1,7 @@
 package com.example.bloodcellcount.repository
 
 import com.example.bloodcellcount.datasource.UserDataSource
-import com.example.bloodcellcount.models.User
+import com.example.bloodcellcount.dataclass.User
 import com.example.bloodcellcount.util.Resource
 import com.example.bloodcellcount.util.safeApiCall
 import kotlinx.coroutines.CoroutineDispatcher

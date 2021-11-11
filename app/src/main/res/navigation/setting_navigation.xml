@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_navigation"
+    app:startDestination="@id/authSettingFragment">
+
+    <fragment
+        android:id="@+id/authSettingFragment"
+        android:name="com.example.bloodcellcount.ui.setting.AuthSettingFragment"
+        android:label="fragment_auth_setting"
+        tools:layout="@layout/fragment_auth_setting" >
+        <action
+            android:id="@+id/action_authSettingFragment_to_authActivity"
+            app:destination="@id/authActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/authActivity"
+        android:name="com.example.bloodcellcount.ui.auth.AuthActivity"
+        android:label="activity_auth"
+        tools:layout="@layout/activity_auth" />
+</navigation>

@@ -1,6 +1,6 @@
 package com.example.bloodcellcount.api
 
-import com.example.bloodcellcount.models.User
+import com.example.bloodcellcount.dataclass.User
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Path
