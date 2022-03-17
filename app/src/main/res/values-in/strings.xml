@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="bloodcell_image">BloodCell Image</string>
     <string name="blood_image">Blood_Image</string>
-    <string name="num_of_red_blood_cell">Num of Red Blood Cell</string>
     <string name="count">Count</string>
     <string name="click_here_to_open_your_image">Click Here to Open Your Image</string>
-    <string name="bloodcell">bloodcell</string>
-    <string name="result">Result</string>
-    <string name="this_field_will_show_your_image_path_in_your_device">This field will show your image path in your device</string>
     <string name="scan_menu">Scan Menu</string>
     <string name="name">name</string>
     <string name="num_of_bloodcell">num of bloodcell</string>
