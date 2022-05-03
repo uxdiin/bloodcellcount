@@ -1,4 +1,4 @@
-package com.example.submission1.module
+package com.example.bloodcellcount.module
 
 import android.content.Context
 import com.example.bloodcellcount.api.AuthDataService
@@ -7,6 +7,7 @@ import com.example.bloodcellcount.api.UserDataService
 import com.example.bloodcellcount.datasource.AuthDataSourceApi
 import com.example.bloodcellcount.datasource.BloodCellDataSource
 import com.example.bloodcellcount.datasource.UserDataSource
+import com.example.bloodcellcount.model.BloodModel
 import com.example.bloodcellcount.repository.AuthRepository
 import com.example.bloodcellcount.repository.BloodCellRepository
 import com.example.bloodcellcount.repository.UserRepository
@@ -22,7 +23,7 @@ import kotlinx.coroutines.Dispatchers
 class RepositoryModule {
     @Provides
     fun provideBloodCellRepository(): BloodCellRepository {
-        return BloodCellRepository(BloodCellDataSource(RetrofitInstance.getRetrofitInstance().create(BloodCellDataService::class.java)))
+        return BloodCellRepository(BloodCellDataSource(RetrofitInstance.getRetrofitInstance().create(BloodCellDataService::class.java)),Dispatchers.IO,BloodModel())
     }
 
     @Provides
@@ -34,4 +35,5 @@ class RepositoryModule {
     fun provideUserRepository(): UserRepository{
         return UserRepository(UserDataSource(RetrofitInstance.getRetrofitInstance().create(UserDataService::class.java)))
     }
+
 }
