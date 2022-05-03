@@ -22,53 +22,18 @@
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteX="16dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/btn_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:background="@drawable/back_button_background"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.006"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageButton
-                    android:id="@+id/btnBack"
-                    android:layout_width="22dp"
-                    android:layout_height="59dp"
-                    android:background="@android:color/white"
-                    android:contentDescription="@string/back_button"
-                    android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/reem_kufi"
-                    android:text="Back"
-                    android:textColor="@color/blue"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/btnBack"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/btnBack"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.56" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profilePicture"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:src="@mipmap/pp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/ic_undraw_profile_pic_ic5t"
                 android:translationZ="1dp"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_back"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.873"
-                app:layout_constraintStart_toEndOf="@+id/btn_back"
-                app:layout_constraintTop_toTopOf="@+id/btn_back"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_user_name"
@@ -76,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/reem_kufi"
-                android:text="Taqi Naufan"
+                android:text="@string/username"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
@@ -85,10 +50,11 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
+                android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/reem_kufi"
-                android:text="Student"
+                android:text="@string/member"
                 app:layout_constraintBottom_toBottomOf="@+id/profilePicture"
                 app:layout_constraintEnd_toEndOf="@+id/tv_user_name"
                 app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
@@ -103,11 +69,11 @@
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 android:textStyle=""
-                app:layout_constraintBottom_toBottomOf="@+id/tv_backbone"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_count"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.063"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_back" />
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
             <EditText
                 android:id="@+id/edt_password"
@@ -183,12 +149,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txt_bonus_received"
+                    android:id="@+id/tv_num_of_scanned_image"
                     android:layout_width="78dp"
                     android:layout_height="73dp"
                     android:layout_marginBottom="24dp"
                     android:fontFamily="sans-serif-thin"
-                    android:text="250"
+                    android:text="@string/_0"
                     android:textColor="@color/white"
                     android:textSize="50sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -219,7 +185,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/reem_kufi"
-                    android:text="num of scan per day"
+                    android:text="Backbone Usage Statistic"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/btn_choose_month"
@@ -250,8 +216,8 @@
                     tools:ignore="Autofill"
                     tools:targetApi="m" />
 
-                <com.github.mikephil.charting.charts.LineChart
-                    android:id="@+id/lc_tkis_coin"
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/ch_backbone_statistic"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:layout_marginTop="8dp"

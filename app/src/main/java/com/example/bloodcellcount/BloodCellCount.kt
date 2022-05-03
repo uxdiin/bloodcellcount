@@ -1,4 +1,4 @@
-package com.example.submission1
+package com.example.bloodcellcount
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

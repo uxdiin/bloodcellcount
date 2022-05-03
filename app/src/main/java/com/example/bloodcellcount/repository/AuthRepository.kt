@@ -3,10 +3,11 @@ package com.example.bloodcellcount.repository
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.bloodcellcount.dataclass.ChangePasswordResponse
 import com.example.bloodcellcount.util.Resource
 import com.example.bloodcellcount.util.safeApiCall
 import com.example.bloodcellcount.datasource.AuthDataSourceApi
-import com.example.bloodcellcount.models.LoginResponse
+import com.example.bloodcellcount.dataclass.LoginResponse
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 
@@ -16,6 +17,7 @@ class AuthRepository(private val authDataSourceApi: AuthDataSourceApi, private v
         private const val PREFERENCE_NAME:String = "auth_preference"
         private const val TOKEN_KEY:String = "token_key"
         private const val ID_KEY = "id_key"
+        private const val PASSWORD_KEY = "password_key"
     }
 
     private var authSharedPreferences: SharedPreferences =
@@ -34,12 +36,22 @@ class AuthRepository(private val authDataSourceApi: AuthDataSourceApi, private v
         editor.apply()
     }
 
+    fun savePassword(password: String){
+        val editor = authSharedPreferences.edit()
+        editor.putString(PASSWORD_KEY, password)
+        editor.apply()
+    }
+
     fun getUserToken(): String? {
         return authSharedPreferences.getString(TOKEN_KEY,null)
     }
 
     fun getUserId(): String? {
         return authSharedPreferences.getString(ID_KEY,null)
+    }
+
+    fun getPassword(): String? {
+        return authSharedPreferences.getString(PASSWORD_KEY, null)
     }
 
     fun clearSharedPreference(){
@@ -51,6 +63,14 @@ class AuthRepository(private val authDataSourceApi: AuthDataSourceApi, private v
     suspend fun login(username:String, password:String): Resource<LoginResponse> {
         return safeApiCall(dispatcher){
             authDataSourceApi.apiTokenAuth(username,password)
+        }
+    }
+
+    suspend fun changePassword(newPassword: String): Resource<ChangePasswordResponse>{
+        val oldPassword  = getPassword()
+
+        return safeApiCall(dispatcher){
+            authDataSourceApi.changePassword(oldPassword!!, newPassword)
         }
     }
 }

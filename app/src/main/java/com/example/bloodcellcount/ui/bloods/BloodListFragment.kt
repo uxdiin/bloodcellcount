@@ -1,26 +1,27 @@
-package com.example.submission1.ui.main.movie
+package com.example.bloodcellcount.ui.bloods
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.Fragment
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bloodcellcount.R
 import com.example.bloodcellcount.databinding.FragmentBloodListBinding
-import com.example.bloodcellcount.models.BloodCell
-import com.example.bloodcellcount.models.BloodPage
-import com.example.bloodcellcount.ui.bloods.BloodListViewModel
+import com.example.bloodcellcount.dataclass.BloodCell
+import com.example.bloodcellcount.dataclass.BloodPage
+import com.example.bloodcellcount.repository.BloodCellRepository
 import com.example.bloodcellcount.ui.genericview.BackButton
 import com.example.bloodcellcount.ui.util.WithBackButtonFragment
 import com.example.bloodcellcount.util.Resource
+import com.example.submission1.ui.main.movie.BloodListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_blood_list.*
 
 
 @AndroidEntryPoint
@@ -28,11 +29,13 @@ class BloodListFragment : WithBackButtonFragment(),BackButton {
 
     private lateinit var bloodListBinding: FragmentBloodListBinding
     private val bloodListViewModel: BloodListViewModel by viewModels()
+    private val bloodListParameters = HashMap<String, String>()
+    private var ordering: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         bloodListBinding = FragmentBloodListBinding.inflate(inflater, container, false)
         return bloodListBinding.root
@@ -53,14 +56,14 @@ class BloodListFragment : WithBackButtonFragment(),BackButton {
 
             )
         }
-        bloodListViewModel.bloodcellList.observe(viewLifecycleOwner, Observer { resource ->
+        bloodListViewModel.bloodcellList.observe(viewLifecycleOwner, { resource ->
             when (resource) {
                 is Resource.Success -> {
 //                    hideProgressBar()
                     resource.data?.let { response ->
-                        Log.d("result", "result")
-                        val bloodPage = response.body() as BloodPage
-                        bloodListAdapter.setBloodList(bloodPage.results as ArrayList<BloodCell>)
+                        response as BloodPage
+                        bloodListAdapter.emptyBloodList()
+                        bloodListAdapter.setBloodList(response.results as ArrayList<BloodCell>)
                         bloodListAdapter.notifyDataSetChanged()
 
                     }
@@ -76,12 +79,45 @@ class BloodListFragment : WithBackButtonFragment(),BackButton {
                 }
             }
         })
-        bloodListViewModel.index()
+        setBloodListParameters(initiate = true)
+        bloodListViewModel.index(bloodListParameters)
         activity?.let {
             bloodListBinding.rvListMovie.apply {
                 layoutManager = LinearLayoutManager(context)
                 adapter = bloodListAdapter
             }
+        }
+        edt_search.setOnEditorActionListener { v, actionId, event ->
+            if (actionId ==EditorInfo.IME_ACTION_DONE){
+                setBloodListParameters()
+                bloodListViewModel.index(bloodListParameters )
+            }
+            false
+        }
+        bloodListBinding.edtPageNumber.setText("1")
+        bloodListBinding.edtPageNumber.setOnEditorActionListener{ v, actionId, event ->
+            if (actionId ==EditorInfo.IME_ACTION_DONE){
+                setBloodListParameters()
+                bloodListViewModel.index(bloodListParameters)
+            }
+            false
+        }
+
+        bloodListBinding.spinnerOrdering.setItems("Descending","Ascending")
+        bloodListBinding.spinnerOrdering.setOnItemSelectedListener{ view, position, id, item ->
+            item as String
+            when(item){
+                ("Descending") -> {
+                    ordering = BloodCellRepository.ORDERING_ID_DESCENDING
+                    Log.d("ordering", ordering)
+                }
+                ("Ascending") -> {
+                    ordering = BloodCellRepository.ORDERING_ID_ASCENDING
+                    Log.d("ordering", ordering)
+                }
+            }
+            setBloodListParameters()
+            bloodListViewModel.index(bloodListParameters)
         }
     }
 
@@ -89,6 +125,21 @@ class BloodListFragment : WithBackButtonFragment(),BackButton {
         bloodListBinding.btnBack.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    private fun setBloodListParameters(initiate: Boolean = false){
+        if(initiate){
+            bloodListParameters["search"] = ""
+            bloodListParameters["limit"] = "10"
+            bloodListParameters["offset"] = "0"
+            bloodListParameters["ordering"] = BloodCellRepository.ORDERING_ID_DESCENDING
+        }else{
+            bloodListParameters["search"] = bloodListBinding.edtSearch.text.toString().trim()
+            bloodListParameters["limit"] = "10"
+            bloodListParameters["offset"] = ((10*bloodListBinding.edtPageNumber.text.toString().toInt())-10).toString()
+            bloodListParameters["ordering"] = ordering
+        }
+
     }
 
 

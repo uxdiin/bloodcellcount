@@ -6,9 +6,7 @@
         app:constraintSetEnd="@layout/activity_main_motion_scene_end"
         app:constraintSetStart="@layout/activity_main_motion_scene_start" >
         <OnSwipe
-            app:touchAnchorId="@+id/container"
             app:touchRegionId="@+id/container"
-            app:touchAnchorSide="top"
             app:dragDirection="dragUp" />
     </Transition>
 

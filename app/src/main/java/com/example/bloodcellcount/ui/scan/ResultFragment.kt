@@ -3,21 +3,24 @@ package com.example.bloodcellcount.ui.scan
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.FileProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.bloodcellcount.BuildConfig
 import com.example.bloodcellcount.MainActivity
-import com.example.bloodcellcount.R
 import com.example.bloodcellcount.databinding.FragmentResultBinding
 import com.example.bloodcellcount.datasource.BloodCellDataSource
-import com.example.bloodcellcount.models.BloodCountResponse
+import com.example.bloodcellcount.dataclass.BloodCountResponse
 import com.example.bloodcellcount.repository.BloodCellRepository
 import com.example.bloodcellcount.ui.util.WithBackButtonFragment
 import com.hbisoft.pickit.PickiT
@@ -26,6 +29,9 @@ import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 @Suppress("RECEIVER_NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
@@ -42,6 +48,7 @@ class ResultFragment : WithBackButtonFragment(), PickiTCallbacks {
 
     companion object{
         const val REQUEST_GET_IMAGE = 2
+        const val REQUEST_GET_IMAGE_FROM_CAMERA = 3
         const val SCAN_METHOD_FROM_CAMERA = 101
         const val SCAN_METHOD_FROM_STORAGE = 102
 
@@ -49,14 +56,6 @@ class ResultFragment : WithBackButtonFragment(), PickiTCallbacks {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (args.scanMode == SCAN_METHOD_FROM_STORAGE) {
-            openPhotoFromStorage()
-            Log.d("open from","storage")
-        }
-        else if (args.scanMode == SCAN_METHOD_FROM_CAMERA) {
-            openPhotoFromCamera()
-            Log.d("open from","camera")
-        }
         super.onCreate(savedInstanceState)
     }
 
@@ -71,6 +70,14 @@ class ResultFragment : WithBackButtonFragment(), PickiTCallbacks {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (args.scanMode == SCAN_METHOD_FROM_STORAGE) {
+            openPhotoFromStorage()
+            Log.d("open from","storage")
+        }
+        else if (args.scanMode == SCAN_METHOD_FROM_CAMERA) {
+            openPhotoFromCamera()
+            Log.d("open from","camera")
+        }
         pickiT = PickiT(requireContext(), this, requireActivity())
         fragmentResultBinding.bloodCellImageView.clipToOutline = true
 
@@ -94,8 +101,8 @@ class ResultFragment : WithBackButtonFragment(), PickiTCallbacks {
             findNavController().popBackStack()
         }
 
-        fragmentResultBinding.tvBackbone.setOnClickListener {
-            fragmentResultBinding.tvBackbone.startAnimation()
+        fragmentResultBinding.btnCount.setOnClickListener {
+            fragmentResultBinding.btnCount.startAnimation()
             (activity as MainActivity).resultFragmentViewModel!!.count(
                 fragmentResultBinding.tvImageName.text.toString(),
                 photo,
@@ -112,18 +119,55 @@ class ResultFragment : WithBackButtonFragment(), PickiTCallbacks {
                             }
                             fragmentResultBinding.bloodCellImageView.commitDrawing()
                         }
-                        fragmentResultBinding.tvBackbone.revertAnimation()
+                        fragmentResultBinding.btnCount.revertAnimation()
                     }
 
                     @SuppressLint("ShowToast")
                     override fun onError(errorMessage: String) {
                         Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
-                        fragmentResultBinding.tvBackbone.revertAnimation()
+                        fragmentResultBinding.btnCount.revertAnimation()
                     }
 
                 })
         }
 
+    }
+
+    @Throws(IOException::class)
+    private fun createImageFile(): File {
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val storageDir: File = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
+        return File.createTempFile(
+            "JPEG_${timeStamp}_",
+            ".jpg",
+            storageDir
+        ).apply {
+            photoPath = absolutePath
+        }
+    }
+
+    private fun dispatchTakePictureIntent() {
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            // Ensure that there's a camera activity to handle the intent
+            takePictureIntent.resolveActivity(requireContext().packageManager)?.also {
+                // Create the File where the photo should go
+                val photoFile: File? = try {
+                    createImageFile()
+                } catch (ex: IOException) {
+                    null
+                }
+
+                photoFile?.also {
+                    val photoURI: Uri = FileProvider.getUriForFile(
+                        requireContext(),
+                        "com.example.android.fileprovider",
+                        it
+                    )
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
+                    startActivityForResult(takePictureIntent, REQUEST_GET_IMAGE_FROM_CAMERA)
+                }
+            }
+        }
     }
 
     private fun placeHolderGone(){
@@ -141,7 +185,7 @@ class ResultFragment : WithBackButtonFragment(), PickiTCallbacks {
     }
 
     private fun openPhotoFromCamera(){
-
+        dispatchTakePictureIntent()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -153,11 +197,26 @@ class ResultFragment : WithBackButtonFragment(), PickiTCallbacks {
                 pickiT.getPath(data.data, Build.VERSION.SDK_INT)
             }
         }
+        if(requestCode == REQUEST_GET_IMAGE_FROM_CAMERA && resultCode == Activity.RESULT_OK){
+            data?.let {
+//                imageData = data.
+                placeHolderGone()
+//                pickiT.getPath(data.data, Build.VERSION.SDK_INT)
+//                dispatchTakePictureIntent()
+                drawImage(photoPath)
+                photo = createMultiPartPhoto(photoPath)
+            }
+        }
     }
 
     private fun drawImage(path: String){
         fragmentResultBinding.bloodCellImageView.setImageFromLocalPath(path)
         fragmentResultBinding.bloodCellImageView.commitDrawing()
+    }
+
+    private fun createMultiPartPhoto(photoPath: String): MultipartBody.Part {
+        val requestBody = RequestBody.create(MediaType.parse("multipart"), File(photoPath))
+        return MultipartBody.Part.createFormData("photo", File(photoPath).name, requestBody)
     }
 
     override fun PickiTonUriReturned() {
@@ -180,12 +239,11 @@ class ResultFragment : WithBackButtonFragment(), PickiTCallbacks {
         Reason: String?
     ) {
         path?.let {
-            val requestBody = RequestBody.create(MediaType.parse("multipart"), File(path!!))
             fragmentResultBinding.tvImageName.text = File(path).name
 
             photoPath = path;
             drawImage(photoPath)
-            photo = MultipartBody.Part.createFormData("photo", File(path).name, requestBody)
+            photo = createMultiPartPhoto(photoPath)
         }
     }
 

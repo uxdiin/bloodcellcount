@@ -2,7 +2,7 @@ package com.example.bloodcellcount.datasource
 
 import android.util.Log
 import com.example.bloodcellcount.api.UserDataService
-import com.example.bloodcellcount.models.User
+import com.example.bloodcellcount.dataclass.User
 import com.example.bloodcellcount.util.AuthUser
 
 class UserDataSource(private val userDataService: UserDataService) {
